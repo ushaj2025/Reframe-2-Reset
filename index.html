@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reset 2 Reframe – Start</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e0f2fe, #fef3c7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 20px;
+      max-width: 430px;
+      width: 90%;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+    }
+    .progress-wrapper {
+      margin-bottom: 16px;
+    }
+    .progress-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+    .progress-bar {
+      width: 100%;
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 6px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 50%; /* Step 1 of 2 */
+      background: linear-gradient(90deg, #0ea5e9, #22c55e);
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    h1 span.emoji {
+      font-size: 1.6rem;
+    }
+    p {
+      font-size: 0.95rem;
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      color: #4b5563;
+    }
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: #111827;
+    }
+    .field-label {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .field-label span.emoji {
+      font-size: 1.1rem;
+    }
+    .hint {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-bottom: 0.4rem;
+    }
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+      background-color: #f9fafb;
+    }
+    select:focus {
+      outline: none;
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 1px #0ea5e9;
+      background-color: #ffffff;
+    }
+    button {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(90deg, #2563eb, #0ea5e9);
+      color: white;
+      margin-top: 4px;
+    }
+    button:hover {
+      filter: brightness(1.02);
+      transform: translateY(-1px);
+      transition: all 0.12s ease-out;
+    }
+    .note {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Progress bar -->
+    <div class="progress-wrapper">
+      <div class="progress-label" id="progress-label">Step 1 of 2</div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Title + intro -->
+    <h1>
+      <span class="emoji">🌿</span>
+      <span id="title-text">Welcome to Reset 2 Reframe</span>
+    </h1>
+    <p id="intro-text">
+      Before we start, please answer a few quick questions. This helps us understand who is using this tool.
+    </p>
+
+    <form id="intro-form">
+
+      <!-- Gender -->
+      <label for="gender" class="field-label">
+        <span class="emoji">👤</span>
+        <span id="gender-label">Gender / Género</span>
+      </label>
+      <div class="hint" id="gender-hint">Choose the option that feels right for you.</div>
+      <select id="gender" name="gender" required>
+        <option value="" disabled selected>Select an option</option>
+        <option value="woman">Woman</option>
+        <option value="man">Man</option>
+        <option value="nonbinary">Non-binary</option>
+        <option value="prefer_not_say">Prefer not to say</option>
+      </select>
+
+      <!-- Coast -->
+      <label for="coast" class="field-label">
+        <span class="emoji">📍</span>
+        <span id="coast-label">Where are you living? / ¿Dónde vives?</span>
+      </label>
+      <div class="hint" id="coast-hint">Choose the region of the U.S. where you live now.</div>
+      <select id="coast" name="coast" required>
+        <option value="" disabled selected>Select an option</option>
+        <option value="west">West Coast</option>
+        <option value="east">East Coast</option>
+      </select>
+
+      <!-- Language -->
+      <label for="language" class="field-label">
+        <span class="emoji">🗣️</span>
+        <span id="language-label">Language / Idioma</span>
+      </label>
+      <div class="hint" id="language-hint">You can see the text in English or Spanish.</div>
+      <select id="language" name="language" required>
+        <option value="" disabled selected>Select a language / Selecciona un idioma</option>
+        <option value="en">English</option>
+        <option value="es">Español (Spanish)</option>
+      </select>
+
+      <!-- Years in US -->
+      <label for="years_us" class="field-label">
+        <span class="emoji">🌎</span>
+        <span id="years-label">How long have you been living in the U.S.? / ¿Cuánto tiempo llevas viviendo en EE. UU.?</span>
+      </label>
+      <div class="hint" id="years-hint">This helps us understand different life experiences.</div>
+      <select id="years_us" name="years_us" required>
+        <option value="" disabled selected>Select an option</option>
+        <option value="born_here">I was born here</option>
+        <option value="less_than_1">I just moved here (less than 1 year)</option>
+        <option value="more_than_1">I have lived in the U.S. for more than 1 year</option>
+      </select>
+
+      <button type="submit" id="submit-button">Continue</button>
+
+      <div class="note" id="note-text">
+        Your answers stay anonymous and are only used to understand users in general.
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Simple EN/ES translations for key text
+    const translations = {
+      en: {
+        progressLabel: "Step 1 of 2",
+        title: "Welcome to Reset 2 Reframe",
+        intro: "Before we start, please answer a few quick questions. This helps us understand who is using this tool.",
+        genderLabel: "Gender / Género",
+        genderHint: "Choose the option that feels right for you.",
+        coastLabel: "Where are you living? / ¿Dónde vives?",
+        coastHint: "Choose the region of the U.S. where you live now.",
+        languageLabel: "Language / Idioma",
+        languageHint: "You can see the text in English or Spanish.",
+        yearsLabel: "How long have you been living in the U.S.? / ¿Cuánto tiempo llevas viviendo en EE. UU.?",
+        yearsHint: "This helps us understand different life experiences.",
+        submit: "Continue",
+        note: "Your answers stay anonymous and are only used to understand users in general."
+      },
+      es: {
+        progressLabel: "Paso 1 de 2",
+        title: "Bienvenido(a) a Reset 2 Reframe",
+        intro: "Antes de comenzar, responde unas preguntas rápidas. Esto nos ayuda a entender quién está usando esta herramienta.",
+        genderLabel: "Género / Gender",
+        genderHint: "Elige la opción que mejor te represente.",
+        coastLabel: "¿Dónde vives? / Where are you living?",
+        coastHint: "Elige la región de EE. UU. donde vives ahora.",
+        languageLabel: "Idioma / Language",
+        languageHint: "Puedes ver el texto en inglés o en español.",
+        yearsLabel: "¿Cuánto tiempo llevas viviendo en EE. UU.? / How long have you been living in the U.S.?",
+        yearsHint: "Esto nos ayuda a entender diferentes experiencias de vida.",
+        submit: "Continuar",
+        note: "Tus respuestas son anónimas y solo se usan para entender a los usuarios en general."
+      }
+    };
+
+    function applyLanguage(lang) {
+      const t = translations[lang] || translations.en;
+
+      document.getElementById("progress-label").textContent = t.progressLabel;
+      document.getElementById("title-text").textContent = t.title;
+      document.getElementById("intro-text").textContent = t.intro;
+
+      document.getElementById("gender-label").textContent = t.genderLabel;
+      document.getElementById("gender-hint").textContent = t.genderHint;
+
+      document.getElementById("coast-label").textContent = t.coastLabel;
+      document.getElementById("coast-hint").textContent = t.coastHint;
+
+      document.getElementById("language-label").textContent = t.languageLabel;
+      document.getElementById("language-hint").textContent = t.languageHint;
+
+      document.getElementById("years-label").textContent = t.yearsLabel;
+      document.getElementById("years-hint").textContent = t.yearsHint;
+
+      document.getElementById("submit-button").textContent = t.submit;
+      document.getElementById("note-text").textContent = t.note;
+    }
+
+    // Default to English on first load
+    applyLanguage("en");
+
+    const languageSelect = document.getElementById("language");
+    languageSelect.addEventListener("change", function (e) {
+      const lang = e.target.value || "en";
+      applyLanguage(lang);
+    });
+
+    // Handle form submission
+    const form = document.getElementById("intro-form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const gender = document.getElementById("gender").value;
+      const coast = document.getElementById("coast").value;
+      const language = document.getElementById("language").value;
+      const years_us = document.getElementById("years_us").value;
+
+      // Save choices locally (still anonymous; no name or email)
+      const introData = { gender, coast, language, years_us };
+      localStorage.setItem("reset2reframe_intro", JSON.stringify(introData));
+
+      // Go to the anonymous reframe page
+      window.location.href = "reframe.html";
+    });
+  </script>
+</body>
+</html>
