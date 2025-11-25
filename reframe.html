@@ -4,6 +4,64 @@
   <meta charset="UTF-8" />
   <title>2-Minute Reset</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  /* ✨ Floating AI Reset Button */
+#ai-reset-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: radial-gradient(circle at 30% 0,
+    #ffffff 0,
+    #fef3ff 30%,
+    #b48cff 65%,
+    #3c76ff 100%);
+  color: #ffffff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  animation: sparkle-pulse 2.4s ease-in-out infinite;
+}
+
+#ai-reset-fab:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
+}
+
+#ai-reset-fab:active {
+  transform: scale(0.97);
+}
+
+#ai-reset-fab::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  animation: sparkle-glow 2.4s ease-in-out infinite;
+}
+
+/* animations */
+@keyframes sparkle-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(60,118,255,0.55); }
+  50% { box-shadow: 0 0 0 14px rgba(60,118,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(60,118,255,0); }
+}
+
+@keyframes sparkle-glow {
+  0% { opacity: 0; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.1); }
+}
+
   <style>
     * {
       box-sizing: border-box;
@@ -307,8 +365,12 @@
       Mindset check-in · Not therapy, just gentle guidance
     </footer>
   </div>
-
-  <script>
+  // ✨ Floating AI Reset Button behavior
+const aiResetFab = document.getElementById("ai-reset-fab");
+aiResetFab.addEventListener("click", () => {
+  goHome(); // soft reset from any screen
+});
+ <script>
     const screens = {
       1: document.getElementById("screen-1"),
       2: document.getElementById("screen-2"),
@@ -480,3 +542,9 @@
   </script>
 </body>
 </html>
+<!-- ✨ Floating AI Reset Button -->
+<button id="ai-reset-fab" title="Reset with AI">
+  ✨
+</button>
+“Add floating AI reset button”
+
