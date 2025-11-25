@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,6 +199,22 @@
       font-size: 0.75rem;
       color: #aaa;
     }
+
+    /* Small AI-style link button on Reframe screen */
+    .ai-link-button {
+      border: none;
+      background: none;
+      color: #3c76ff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0 2px;
+    }
+
+    .ai-link-button:hover {
+      opacity: 0.85;
+    }
   </style>
 </head>
 <body>
@@ -247,6 +264,15 @@
           unclench.
         </div>
       </div>
+
+      <!-- Extra AI resource helper -->
+      <div class="center small-text" style="margin-top: 4px;">
+        Want another gentle idea?
+        <button type="button" id="ai-extra-btn" class="ai-link-button">
+          AI suggestion
+        </button>
+      </div>
+      <div class="small-text" id="ai-extra-text"></div>
 
       <button class="primary-btn" onclick="goToTimer()">
         Take a 2-minute Reset
@@ -323,6 +349,8 @@
     const timerDisplay = document.getElementById("timer-display");
     const timerTip = document.getElementById("timer-tip");
     const saveMessage = document.getElementById("save-message");
+    const aiExtraBtn = document.getElementById("ai-extra-btn");
+    const aiExtraText = document.getElementById("ai-extra-text");
 
     let selectedChip = null;
     let timerInterval = null;
@@ -375,6 +403,38 @@
       "It’s okay to take this pause—you’re allowed to rest for a moment.",
     ];
 
+    // Extra gentle AI-style reframes as an additional resource
+    const extraReframes = {
+      Calm: [
+        "You don’t have to do anything special with this calm—just notice it and let it support you.",
+        "If things get busy later, you can remember this moment of steadiness."
+      ],
+      Tense: [
+        "You’re not failing by feeling tense—your body is responding to a lot all at once.",
+        "You’re allowed to set one small boundary or say no to one tiny thing today."
+      ],
+      Tired: [
+        "Needing rest doesn’t mean you’re weak—it usually means you’ve been strong for a long time.",
+        "Even a 30-second pause is still real care for your body."
+      ],
+      Distracted: [
+        "Your attention is valuable—it makes sense that many things are trying to pull at it.",
+        "Choosing one thing to care about right now is enough."
+      ],
+      Grateful: [
+        "Gratitude doesn’t cancel out hard things—it just gives you something kind to hold alongside them.",
+        "You can let this feeling of gratitude be a quiet anchor in the background today."
+      ],
+      Overwhelmed: [
+        "Overwhelm often means the load is too big, not that you are too small.",
+        "You’re allowed to shrink your to-do list, even a little."
+      ],
+      default: [
+        "Whatever you’re feeling, it makes sense. You’re allowed to move gently with it.",
+        "You don’t have to fix everything in this moment—you can just meet yourself where you are."
+      ]
+    };
+
     chips.forEach((chip) => {
       chip.addEventListener("click", () => {
         chips.forEach((c) => c.classList.remove("active"));
@@ -385,12 +445,24 @@
       });
     });
 
+    aiExtraBtn.addEventListener("click", () => {
+      const key =
+        selectedChip && extraReframes[selectedChip]
+          ? selectedChip
+          : "default";
+
+      const options = extraReframes[key];
+      const randomIndex = Math.floor(Math.random() * options.length);
+      aiExtraText.textContent = options[randomIndex];
+    });
+
     function applyReframe(chipName) {
       selectedChipText.innerHTML =
         "You checked in as: <strong>" + chipName + "</strong>";
       const content = reframesByChip[chipName] || reframesByChip["Tired"];
       reframeText.textContent = content.reframe;
       microActionText.textContent = content.action;
+      aiExtraText.textContent = ""; // clear previous AI suggestion on new chip
     }
 
     function showScreen(number) {
@@ -408,6 +480,7 @@
         "You don’t have to name what you feel to deserve a pause. This reset is here for you anyway.";
       microActionText.textContent =
         "Simply notice your breath coming in and going out for a few cycles.";
+      aiExtraText.textContent = "";
       showScreen(2);
     }
 
@@ -423,6 +496,7 @@
       chips.forEach((c) => c.classList.remove("active"));
       selectedChip = null;
       saveMessage.textContent = "";
+      aiExtraText.textContent = "";
       showScreen(1);
     }
 
@@ -480,4 +554,5 @@
   </script>
 </body>
 </html>
+
 
